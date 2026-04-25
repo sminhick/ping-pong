@@ -37,7 +37,10 @@ ball = GameSprite('frog.png', 350, 250, 0 ,100, 100)
 speed_x = 3
 speed_y = 3
 
-
+font.init()
+font1 = font.SysFont('Arial', 40)
+lose1 = font1.render('Первый игрок проиграл!', True, (255,0,0))
+lose2 = font1.render('Второй игрок проиграл!', True, (255,0,0))
 
 
 
@@ -62,6 +65,12 @@ while game:
             speed_y *= -1
         if sprite.collide_rect(player1, ball) or sprite.collide_rect(player2, ball):
             speed_x *= -1
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 200))
+        if ball.rect.x > 600:
+            finish = True
+            window.blit(lose2, (200, 200))
 
     display.update()
     clock.tick(60)
